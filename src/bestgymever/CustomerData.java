@@ -12,6 +12,26 @@ public class CustomerData {
     Customer visitor;
     boolean active;
     
+    public CustomerData(){
+        System.out.println(Design.START.line);
+        List<Customer> customers;
+        customers = getCustomers();
+        while (true){
+            String nameOrNumber = visitorInput();
+            if(nameOrNumber.equals(""))
+                break;
+            if(isCustomer(nameOrNumber, customers)){
+                visitor = customers.get(customerIndex);
+                if(isActive(visitor))
+                    registerWorkout(visitor);
+            } else {
+                System.out.println(nameOrNumber + " finns ej i kundregistret.\n");
+            }
+            System.out.println(Design.SPLIT.line);
+        }
+        System.out.println(Design.STOP.line);
+    }
+    
     public List<Customer> getCustomers(){
         StringBuilder tempS = new StringBuilder();
         List<Customer> customers = new ArrayList();

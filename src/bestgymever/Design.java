@@ -10,6 +10,4 @@ public enum Design {
     Design(String line){
         this.line = line;
     }
-    
-    
 }
