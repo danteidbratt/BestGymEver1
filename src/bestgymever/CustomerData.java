@@ -8,31 +8,10 @@ import java.util.*;
 
 public class CustomerData {
     
-    protected int customerIndex;
-    protected Customer visitor;
-    protected boolean active;
+    public int customerIndex;
+    Customer visitor;
+    boolean active;
     
-    public CustomerData(){
-        System.out.println(Design.START.line);
-        List<Customer> customers;
-        customers = getCustomers();
-        while (true){
-            String nameOrNumber = visitorInput();
-            if(isCustomer(nameOrNumber, customers)){
-                visitor = customers.get(customerIndex);
-                if(isActive(visitor))
-                    registerWorkout(visitor);
-            } else {
-                System.out.println(nameOrNumber + " finns ej i kundregistret.\n");
-            }
-            System.out.println(Design.SPLIT.line);
-        }
-    }
-    
-    /**
-     * Returns a List containing all customers registered in "Customers.txt". 
-     * @return 
-     */
     public List<Customer> getCustomers(){
         StringBuilder tempS = new StringBuilder();
         List<Customer> customers = new ArrayList();
@@ -52,11 +31,6 @@ public class CustomerData {
         return customers;
     }
     
-    /**
-     * Creates a Customer object.
-     * @param tempS
-     * @return 
-     */
     public Customer pickCustomer(String tempS){
         Scanner sc = new Scanner(tempS);
         String tempP = sc.next();
@@ -67,28 +41,12 @@ public class CustomerData {
         return x;
     }
     
-    /**
-     * Asks user to input name or personal number.
-     * Exit program if input is empty.
-     * @return 
-     */
     public String visitorInput(){
         Scanner input = new Scanner(System.in);
         System.out.print("Ange namn eller personnummer:\t");
-        String nameOrNumber = input.nextLine();
-        if(nameOrNumber.equals("")){
-            System.out.println(Design.STOP.line);
-            System.exit(0);
-        }
-        return nameOrNumber;
+        return input.nextLine();
     }
     
-    /**
-     * Checks is user input matches any registered customer if "Customer.txt".
-     * @param visitor
-     * @param customers
-     * @return 
-     */
     public boolean isCustomer(String visitor, List<Customer> customers){
         for (int i = 0; i < customers.size(); i++) {
             if(visitor.equalsIgnoreCase(customers.get(i).getNamn()) 
@@ -100,11 +58,6 @@ public class CustomerData {
         return false;
     }
     
-    /**
-     * Checks if customer is active.
-     * @param customer
-     * @return 
-     */
     public boolean isActive(Customer customer){
         active = customer.betalning.compareTo(LocalDate.now().minusYears(1)) > 0;
         if(active)
