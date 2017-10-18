@@ -9,7 +9,6 @@ import org.junit.Test;
 
 public class BestGymEverTest {
     
-    BestGymEver bge = new BestGymEver();
     CustomerData cd = new CustomerData();
     
     @Test
